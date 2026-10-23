@@ -90,11 +90,22 @@
       line-height:1.2;
     }
 
-    .cart-fab{
-      position:fixed;right:28px;bottom:28px;z-index:20;border:0;border-radius:999px;
-      padding:15px 20px;background:var(--orange);color:#fff;font-weight:800;
-      box-shadow:var(--shadow);cursor:pointer;
+    .directory-header{
+      position:sticky;top:0;z-index:40;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:13px 20px;margin:0 0 28px;
+      background:rgba(255,255,255,.97);border:1px solid var(--line);
+      border-radius:16px;box-shadow:0 5px 22px rgba(17,24,39,.07);
     }
+    .header-brand{display:flex;flex-direction:column;gap:3px}
+    .header-brand strong{font-size:17px;letter-spacing:-.02em}
+    .header-brand small{font-size:11px;color:var(--muted);font-weight:700}
+    .cart-fab{
+      border:0;border-radius:12px;padding:13px 18px;
+      background:var(--orange);color:#fff;font-size:14px;font-weight:800;
+      box-shadow:0 5px 16px rgba(17,24,39,.18);cursor:pointer;
+    }
+    .cart-fab[hidden]{display:none!important}
 
     .overlay{
       position:fixed;inset:0;background:rgba(17,24,39,.55);z-index:50;
@@ -399,7 +410,9 @@
       .filter-row,.detail-grid{grid-template-columns:1fr}
       .reset-filter-btn{width:100%;}
       h1{font-size:34px}
-      .cart-fab{right:16px;bottom:16px}
+      .directory-header{padding:12px 14px;margin-bottom:20px}
+      .header-brand strong{font-size:15px}
+      .cart-fab{padding:12px 14px;font-size:12px}
       .detail-top-btn{right:16px;bottom:82px;}
     }
     @media(max-width:700px){.detail-products{grid-template-columns:1fr;}}
@@ -418,6 +431,12 @@
 <body>
 
   <main class="wrap" id="mainApp">
+    <header class="directory-header">
+      <div class="header-brand"><strong>Supplier Directory</strong><small>2026 KGSF · INCHEON</small></div>
+      <button id="cartFab" class="cart-fab" type="button" onclick="openCart()" hidden aria-label="Open my meeting list">
+        ☷ My Meeting List (<span id="cartCount">0</span>)
+      </button>
+    </header>
     <section id="directoryView">
       <h1>Supplier Directory</h1>
       <p class="sub">
@@ -483,9 +502,6 @@
   title="Back to top">
   ↑</button>
 
-  <button id="cartFab" class="cart-fab" type="button" onclick="openCart()" hidden>
-    Meeting List (<span id="cartCount">0</span>)
-  </button>
 
   <div id="cartOverlay" class="overlay">
     <div class="modal">
